@@ -54,7 +54,7 @@ function clickedBox(element) {
 function bot() {
     let array = [];
     for (let i = 0; i < allBox.length; i++) {
-        if (allBox[i].childElementCount == 0 && runBot !== false) {
+        if (allBox[i].childElementCount == 0 && runBot != false) {
             array.push(i);
         }
     }
