@@ -53,30 +53,33 @@ function clickedBox(element) {
 
 function bot() {
     let array = [];
-    for (let i = 0; i < allBox.length; i++) {
-        if (allBox[i].childElementCount == 0 && runBot != false) {
-            array.push(i);
+    if(runBot){
+        playerSign = "O";
+        for (let i = 0; i < allBox.length; i++) {
+            if (allBox[i].childElementCount == 0) {
+                array.push(i);
+            }
         }
-    }
-    let randomBox = array[Math.floor(Math.random() * array.length)];
+        let randomBox = array[Math.floor(Math.random() * array.length)];
 
-    if (array.length > 0) {
-        if (players.classList.contains("player")) {
+        if (array.length > 0) {
+            if (players.classList.contains("player")) {
+                playerSign = "X";
+                allBox[randomBox].innerHTML = `<i class="${playerXicon}"></i>`;
+                allBox[randomBox].setAttribute("id", playerSign);
+                players.classList.add("active");
+            } else {
+                allBox[randomBox].innerHTML = `<i class="${playerOicon}"></i>`;
+                players.classList.remove("active");
+                allBox[randomBox].setAttribute("id", playerSign);
+            }
+            selectWinner();
+            allBox[randomBox].style.pointerEvents = "none";
+            playBoard.style.pointerEvents = "auto";
             playerSign = "X";
-            allBox[randomBox].innerHTML = `<i class="${playerXicon}"></i>`;
-            allBox[randomBox].setAttribute("id", playerSign);
-            players.classList.add("active");
-        } else {
-            allBox[randomBox].innerHTML = `<i class="${playerOicon}"></i>`;
-            players.classList.remove("active");
-            allBox[randomBox].setAttribute("id", playerSign);
         }
-        selectWinner();
-        allBox[randomBox].style.pointerEvents = "none";
-        playBoard.style.pointerEvents = "auto";
     }
 }
-
 function getIdVal(classname) {
     return document.querySelector(".box" + classname).id;
 }
@@ -114,4 +117,9 @@ function selectWinner() {
 
 replayBtn.onclick = () => {
     window.location.reload();
-};
+}
+
+
+    
+
+
